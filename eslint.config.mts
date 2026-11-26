@@ -29,4 +29,22 @@ export default defineConfig(
 		},
 	},
 	...obsidianmd.configs.recommended,
+	{
+		// src/dev/corpus-check.ts is a node-only developer harness: it reads a
+		// vault from disk and prints a report. It is never reachable from
+		// src/main.ts, so it never ships in main.js. This override has to come
+		// after the recommended config, which is what turns those rules on.
+		files: ['src/dev/corpus-check.ts'],
+		languageOptions: {
+			globals: {
+				...globals.node,
+			},
+		},
+		rules: {
+			'obsidianmd/no-nodejs-modules': 'off',
+			'import/no-extraneous-dependencies': 'off',
+			'obsidianmd/rule-custom-message': 'off',
+			'obsidianmd/hardcoded-config-path': 'off',
+		},
+	},
 );

@@ -1,8 +1,468 @@
-/*
+/* CardKit card chrome.
+   Colours come from Obsidian theme variables so the cards follow the user's
+   theme; the only per-card input is --card-kit-accent. */
 
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
+.card-kit {
+	--card-kit-accent: var(--interactive-accent);
+	--card-kit-border: var(--background-modifier-border);
+	--card-kit-radius: var(--radius-m, 8px);
+	border: 1px solid var(--card-kit-border);
+	border-radius: var(--card-kit-radius);
+	background-color: var(--background-primary);
+	overflow: hidden;
+	margin-block: var(--size-4-3, 12px);
+}
 
-If your plugin does not need CSS, delete this file.
+.card-kit-header {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-4-1, 4px);
+	padding: var(--size-4-3, 12px) var(--size-4-4, 16px);
+	border-bottom: 1px solid var(--card-kit-border);
+	background-color: var(--background-secondary);
+}
 
-*/
+.card-kit-title-area {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-4-1, 4px);
+}
+
+.card-kit-title-row {
+	display: flex;
+	align-items: center;
+	gap: var(--size-4-2, 8px);
+}
+
+.card-kit-step {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 1.75em;
+	padding: 0 0.5em;
+	border-radius: var(--radius-s, 4px);
+	background-color: var(--card-kit-accent);
+	color: var(--text-on-accent);
+	font-size: var(--font-ui-smaller);
+	font-weight: var(--font-semibold);
+}
+
+.card-kit-title {
+	font-size: var(--font-ui-medium);
+	font-weight: var(--font-semibold);
+	color: var(--text-normal);
+}
+
+.card-kit-meta {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--size-4-2, 8px);
+}
+
+.card-kit-scope,
+.card-kit-tag {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35em;
+	padding: 0.1em 0.5em;
+	border-radius: var(--radius-s, 4px);
+	font-size: var(--font-ui-smaller);
+	color: var(--text-muted);
+	background-color: var(--background-modifier-hover);
+}
+
+.card-kit-scope-icon {
+	display: inline-flex;
+	align-items: center;
+}
+
+.card-kit-desc {
+	color: var(--text-muted);
+	font-size: var(--font-ui-small);
+}
+
+.card-kit-desc > :first-child {
+	margin-top: 0;
+}
+
+.card-kit-desc > :last-child {
+	margin-bottom: 0;
+}
+
+.card-kit-body {
+	display: flex;
+	flex-direction: column;
+}
+
+.card-kit-code {
+	overflow-x: auto;
+}
+
+.card-kit-code pre {
+	margin: 0;
+	border-radius: 0;
+	background-color: var(--code-background);
+}
+
+.card-kit-code pre > code {
+	background-color: transparent;
+}
+
+.card-kit-notes {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-4-1, 4px);
+	padding: var(--size-4-3, 12px) var(--size-4-4, 16px);
+	border-top: 1px solid var(--card-kit-border);
+	background-color: var(--background-secondary);
+}
+
+.card-kit-notes[hidden] {
+	display: none;
+}
+
+.card-kit-note-row {
+	display: grid;
+	grid-template-columns: minmax(5em, 11em) 1fr;
+	align-items: baseline;
+	gap: var(--size-4-2, 8px) var(--size-4-3, 12px);
+	font-size: var(--font-ui-small);
+}
+
+.card-kit-note-left {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+}
+
+.card-kit-note-left-empty {
+	display: none;
+}
+
+.card-kit-note-token {
+	font-family: var(--font-monospace);
+	color: var(--card-kit-accent);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.card-kit-note-kind {
+	font-size: var(--font-ui-smaller);
+	color: var(--text-faint);
+}
+
+.card-kit-note-text {
+	color: var(--text-muted);
+	overflow-wrap: anywhere;
+	min-width: 0;
+}
+
+@media (max-width: 480px) {
+	.card-kit-note-row {
+		grid-template-columns: 1fr;
+	}
+}
+
+.card-kit-footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--size-4-2, 8px);
+	padding: var(--size-4-2, 8px) var(--size-4-3, 12px);
+	border-top: 1px solid var(--card-kit-border);
+	background-color: var(--background-secondary);
+}
+
+.card-kit-lang {
+	font-family: var(--font-monospace);
+	font-size: var(--font-ui-smaller);
+	color: var(--text-faint);
+}
+
+.card-kit-actions {
+	display: flex;
+	align-items: center;
+	gap: var(--size-4-2, 8px);
+	margin-inline-start: auto;
+}
+
+.card-kit-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35em;
+	padding: 0.15em 0.6em;
+	font-size: var(--font-ui-smaller);
+	color: var(--text-muted);
+	background-color: transparent;
+	border: 1px solid var(--card-kit-border);
+	border-radius: var(--radius-s, 4px);
+	box-shadow: none;
+	cursor: pointer;
+}
+
+.card-kit-btn:hover {
+	color: var(--text-normal);
+	background-color: var(--background-modifier-hover);
+}
+
+.card-kit-btn:focus-visible {
+	outline: 2px solid var(--card-kit-accent);
+	outline-offset: 1px;
+}
+
+.card-kit-btn-icon {
+	display: inline-flex;
+	align-items: center;
+}
+
+.card-kit-problems {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.35em;
+	padding: var(--size-4-2, 8px) var(--size-4-3, 12px);
+	color: var(--text-warning);
+	font-size: var(--font-ui-smaller);
+	border-top: 1px solid var(--card-kit-border);
+}
+
+.card-kit-problems-icon {
+	display: inline-flex;
+	align-items: center;
+}
+
+/* Settings tab: the JSON editor for custom card types. */
+
+.card-kit-edit-input {
+	width: 100%;
+	min-height: 8em;
+	font-family: var(--font-monospace);
+	font-size: var(--font-ui-smaller);
+	white-space: pre;
+	overflow-wrap: normal;
+	overflow-x: auto;
+}
+
+.card-kit-edit-note {
+	margin-block: var(--size-4-2, 8px) var(--size-4-1, 4px);
+	color: var(--text-muted);
+	font-size: var(--font-ui-smaller);
+}
+
+.card-kit-suggest-label {
+	font-family: var(--font-monospace);
+}
+
+.card-kit-suggest-detail {
+	color: var(--text-muted);
+	font-size: var(--font-ui-smaller);
+}
+
+.card-kit-hint {
+	margin-block: var(--size-4-2, 8px);
+	color: var(--text-muted);
+	font-size: var(--font-ui-smaller);
+}
+
+.card-kit-json-setting {
+	display: block;
+}
+
+.card-kit-json-setting .setting-item-control {
+	width: 100%;
+}
+
+.card-kit-json-input {
+	width: 100%;
+	min-height: 12em;
+	font-family: var(--font-monospace);
+	font-size: var(--font-ui-smaller);
+	white-space: pre;
+	overflow-wrap: normal;
+	overflow-x: auto;
+}
+
+.card-kit-settings-problems {
+	margin-top: var(--size-4-2, 8px);
+	padding: var(--size-4-2, 8px) var(--size-4-3, 12px);
+	border: 1px solid var(--background-modifier-error);
+	border-radius: var(--radius-s, 4px);
+	color: var(--text-error);
+	font-size: var(--font-ui-smaller);
+}
+
+.card-kit-settings-problem {
+	margin-block: 0.15em;
+}
+
+.card-kit-settings-ok {
+	margin-top: var(--size-4-2, 8px);
+	color: var(--text-success);
+	font-size: var(--font-ui-smaller);
+}
+
+.card-kit-settings-variable .setting-item-control input[type='text'] {
+	width: 12em;
+}
+
+/* Endpoint cards (api-endpoints). Method colours are variables, so a CSS
+   snippet can retheme them without touching the plugin. */
+
+.card-kit-endpoints {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-4-3, 12px);
+	margin-block: var(--size-4-3, 12px);
+}
+
+.card-kit-endpoint {
+	--ck-get: #4dabf7;
+	--ck-post: #40c057;
+	--ck-put: #fab005;
+	--ck-delete: #fa5252;
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-4-2, 8px);
+	padding: var(--size-4-3, 12px);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-m, 8px);
+	background-color: var(--background-primary);
+}
+
+.card-kit-endpoint-flow {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--size-4-1, 4px);
+}
+
+.card-kit-endpoint-step {
+	padding: 0.1em 0.5em;
+	border-radius: var(--radius-s, 4px);
+	background-color: var(--background-modifier-hover);
+	color: var(--text-muted);
+	font-size: var(--font-ui-smaller);
+}
+
+.card-kit-endpoint-arrow {
+	display: inline-flex;
+	align-items: center;
+	color: var(--text-faint);
+}
+
+.card-kit-endpoint-flow .card-kit-btn {
+	margin-inline-start: auto;
+}
+
+.card-kit-endpoint-header {
+	display: flex;
+	align-items: center;
+	gap: var(--size-4-2, 8px);
+}
+
+.card-kit-endpoint-method {
+	flex: 0 0 auto;
+	padding: 0.15em 0.6em;
+	border-radius: var(--radius-s, 4px);
+	background-color: var(--text-muted);
+	color: var(--text-on-accent);
+	font-family: var(--font-monospace);
+	font-size: var(--font-ui-smaller);
+	font-weight: var(--font-semibold);
+}
+
+.card-kit-endpoint-method[data-method='GET'] {
+	background-color: var(--ck-get);
+}
+
+.card-kit-endpoint-method[data-method='POST'] {
+	background-color: var(--ck-post);
+}
+
+.card-kit-endpoint-method[data-method='PUT'] {
+	background-color: var(--ck-put);
+}
+
+.card-kit-endpoint-method[data-method='DELETE'] {
+	background-color: var(--ck-delete);
+}
+
+.card-kit-endpoint-url {
+	flex: 1 1 auto;
+	min-width: 0;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	color: var(--text-normal);
+	font-family: var(--font-monospace);
+	font-size: var(--font-ui-smaller);
+}
+
+.card-kit-endpoint-example {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-4-1, 4px);
+}
+
+.card-kit-endpoint-example-label {
+	font-size: var(--font-ui-smaller);
+	color: var(--text-faint);
+}
+
+.card-kit-endpoint-pane {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-s, 4px);
+	overflow: hidden;
+}
+
+.card-kit-endpoint-pane-head {
+	display: flex;
+	align-items: center;
+	gap: var(--size-4-2, 8px);
+	padding: 0.2em var(--size-4-2, 8px);
+	background-color: var(--background-secondary);
+}
+
+.card-kit-endpoint-pane-label {
+	color: var(--text-normal);
+	font-size: var(--font-ui-smaller);
+	font-weight: var(--font-semibold);
+}
+
+.card-kit-endpoint-chip {
+	padding: 0 0.4em;
+	border: 1px solid currentColor;
+	border-radius: var(--radius-s, 4px);
+	color: var(--card-kit-chip-color, var(--text-accent));
+	font-size: var(--font-ui-smaller);
+}
+
+.card-kit-endpoint-type {
+	margin-inline-start: auto;
+	color: var(--text-faint);
+	font-family: var(--font-monospace);
+	font-size: var(--font-ui-smaller);
+}
+
+.card-kit-endpoint-code {
+	overflow-x: auto;
+}
+
+.card-kit-endpoint-code pre {
+	margin: 0;
+	border-radius: 0;
+	background-color: var(--code-background);
+}
+
+.card-kit-endpoint-pre {
+	margin: 0;
+	padding: var(--size-4-2, 8px);
+	font-family: var(--font-monospace);
+	font-size: var(--font-ui-smaller);
+	white-space: pre;
+	overflow-x: auto;
+}
+

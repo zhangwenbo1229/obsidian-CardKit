@@ -1,7 +1,7 @@
 {
-	"name": "obsidian-sample-plugin",
-	"version": "1.0.0",
-	"description": "This is a sample plugin for Obsidian (https://obsidian.md)",
+	"name": "obsidian-card-kit",
+	"version": "0.1.0",
+	"description": "Renders card, payload, endpoint and custom card types from fenced code blocks.",
 	"main": "main.js",
 	"type": "module",
 	"scripts": {
@@ -10,7 +10,13 @@
 		"version": "node version-bump.mjs && git add manifest.json versions.json",
 		"lint": "eslint ."
 	},
-	"keywords": [],
+	"keywords": [
+		"obsidian",
+		"obsidian-plugin",
+		"cards",
+		"payload",
+		"code-block"
+	],
 	"license": "0-BSD",
 	"devDependencies": {
 		"@eslint/js": "^9.39.4",
